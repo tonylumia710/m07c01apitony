@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/css/style.css' />
+  </head>
+  <body>
+    <figure>
+      <img src="/img/logo-DH.png" alt="Logo Digital House">
+    </figure>
+    <h1><%= title %></h1>
+    <p>Bienvenidos a <%= title %></p>
+    <p><a href="/movies">Listado de Películas</a></p>
+    <p><a href="/api/actors">Listado de actores</a></p>
+    
+    <hr>
+    
+    <h3>Listado de películas con filtro:</h3>
+    <form action="/api/movies" method="get">
+      <label for="genre">Género de película:</label>
+      <select name="genre" id="genre">
+        <option value="0">Todos</option>
+        <% if( locals.genres ) { %>
+          <% genres.forEach(genre => { %>
+            <option value=<%=`${genre.id}`%>><%=genre.name%></option>
+          <% }); %>
+        <% } %>
+      </select>
+      <br>
+      <label for="actor_name">Nombre de actor:</label>
+      <input type="text" name="actor_name" id="actor_name">
+      <br>
+      <input type="submit" value="Enviar">
+    </form>
+    
+    <hr>
+
+    <h3>Listado de actores con filtro:</h3>
+    <form action="/api/actors" method="get">
+      <label for="movies_ratings">Rating de las películas en las que trabajaron los actores/actrices.</label>
+      <input type="number" name="movies_ratings" min="0" max="10" id="movies_ratings" value="0">
+      <br>
+      <label for="genre">Género de película:</label>
+      <select name="genre" id="genre">
+        <option value="0">Todos</option>
+        <% if( locals.genres ) { %>
+          <% genres.forEach(genre => { %>
+            <option value=<%=`${genre.id}`%>><%=genre.name%></option>
+          <% }); %>
+        <% } %>
+      </select>
+      <br>
+      <input type="submit" value="Enviar">
+    </form>
+    
+  </body>
+</html>
